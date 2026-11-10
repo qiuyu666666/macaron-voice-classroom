@@ -1,0 +1,4 @@
+// No subprocess is started until a concrete command contract and operator identity are verified.
+const operations=new Set(['register','login','history','send']);
+export function validateOperation(operation,args){if(!operations.has(operation))throw Error('操作不在白名单');if(!args||typeof args!=='object'||Array.isArray(args))throw Error('参数错误');const allowed={register:['email','password'],login:['email','password'],history:['cursor','limit'],send:['text']}[operation];if(Object.keys(args).some(k=>!allowed.includes(k)))throw Error('不允许命令、路径、环境或身份覆盖');if(['register','login'].includes(operation)&&(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(args.email)||typeof args.password!=='string'||args.password.length<8||args.password.length>256))throw Error('账号参数错误');return{operation,args}}
+export async function executeOperation(operation,args){validateOperation(operation,args);throw Error('真实 CLI 操作未启用：必须先验证目标环境、授权身份和命令协议');}

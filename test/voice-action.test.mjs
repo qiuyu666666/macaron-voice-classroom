@@ -1,0 +1,4 @@
+import test from'node:test';import assert from'node:assert/strict';import{voiceActions}from'../public/voice-action.mjs';
+const valid='```voice-call\n{"label":"开始学习","goal":"电路","course_brief":"开关"}\n```';
+test('only complete validated voice-call blocks become actions',()=>{assert.equal(voiceActions(valid).length,1);assert.equal(voiceActions(valid.slice(0,-3)).length,0);assert.equal(voiceActions('请开始学习').length,0);assert.equal(voiceActions('```voice-call\n{"label":"开始","goal":"电路","course_brief":"开关","path":"/tmp"}\n```').length,0);assert.equal(voiceActions(valid.replace('"电路"','null')).length,0)});
+test('multiple buttons preserve source positions and stable indexes',()=>{const text='第一段\n'+valid+'\n第二段\n'+valid;const a=voiceActions(text);assert.deepEqual(a.map(x=>x.index),[0,1]);for(const x of a)assert.equal(text.slice(x.start,x.end),valid)});

@@ -1,0 +1,3 @@
+import{readFile}from'node:fs/promises';
+export async function courseBridgeSource(){const quick=await readFile(new URL('./public/quick-lesson.mjs',import.meta.url),'utf8');const ink=await readFile(new URL('./public/lesson-ink.js',import.meta.url),'utf8');const bridge=await readFile(new URL('./public/course-bridge.js',import.meta.url),'utf8');return '(()=>{\n'+quick.replace(/^export /gm,'')+'\n'+ink+'\n'+bridge+'\n})();'}
+export function injectQuickPages(html,pages={}){return html.replace('<script>','<script type="application/json" id="lesson-quick-pages">'+JSON.stringify(pages).replaceAll('<','\\u003c')+'</script><script>')}

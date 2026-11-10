@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Macaron · 登录</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;display:grid;place-items:center;padding:24px;background:#f2f2f0;color:#36332e;font:16px/1.5 system-ui}
+main{width:min(100%,400px);padding:30px;border-radius:28px;background:#fffdf7}
+h1{margin:0 0 22px;font-size:26px}
+button{width:100%;padding:13px;border:0;border-radius:16px;font:inherit;font-weight:600;color:#392a31;background:#edced7;cursor:pointer}
+button:disabled{cursor:wait}
+p{margin:14px 0 0;color:#68645d;font-size:14px}
+#status:empty{display:none}
+</style></head><body><main>
+<h1>你好，Macaron</h1>
+<button type="button" id="pi-login">使用 Pi 登录</button>
+<p>首次登录会创建测试账号。语音课堂会保存双方录音和学习小结。</p>
+<p id="status" role="status" aria-live="polite"></p>
+</main><script src="/accounts.js"></script></body></html>

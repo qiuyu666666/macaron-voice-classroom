@@ -1,0 +1,2 @@
+// Cryptographic, browser-local draft only. No storage or network.
+export function generateAccount(domain,cryptoProvider=globalThis.crypto){if(!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(domain)||domain.length>180)throw Error('请输入已获准使用的邮箱域名');const bytes=new Uint8Array(24);cryptoProvider.getRandomValues(bytes);const hex=Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');return{email:'test-'+hex.slice(0,16)+'@'+domain,password:'Aa9!'+hex.slice(16)}}
